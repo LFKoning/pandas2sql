@@ -7,7 +7,16 @@ class SQLGenerator:
     """Base class for SQL generating classes."""
 
     # Map pandas to SQL data types
-    _SQL_TYPES = {}
+    _SQL_TYPES = {
+        "string": "TEXT",
+        "floating": "REAL",
+        "integer": "INTEGER",
+        "datetime": "TIMESTAMP",
+        "datetime64": "TIMESTAMP",
+        "date": "DATE",
+        "time": "TIME",
+        "boolean": "INTEGER",
+    }
 
     def __init__(self, indent=2):
         self._indent = int(indent)
@@ -158,17 +167,6 @@ class SQLGenerator:
 class MSSQLGenerator(SQLGenerator):
     """Class for generating MS SQL Server compatible SQL."""
 
-    _SQL_TYPES = {
-        "string": "TEXT",
-        "floating": "REAL",
-        "integer": "INTEGER",
-        "datetime": "TIMESTAMP",
-        "datetime64": "TIMESTAMP",
-        "date": "DATE",
-        "time": "TIME",
-        "boolean": "INTEGER",
-    }
-
     @staticmethod
     def _id(identifier):
         return f"[{identifier}]"
@@ -176,17 +174,6 @@ class MSSQLGenerator(SQLGenerator):
 
 class MySQLGenerator(SQLGenerator):
     """Class for generating MySQL compatible SQL."""
-
-    _SQL_TYPES = {
-        "string": "TEXT",
-        "floating": "REAL",
-        "integer": "INTEGER",
-        "datetime": "TIMESTAMP",
-        "datetime64": "TIMESTAMP",
-        "date": "DATE",
-        "time": "TIME",
-        "boolean": "INTEGER",
-    }
 
     @staticmethod
     def _id(identifier):
@@ -196,17 +183,6 @@ class MySQLGenerator(SQLGenerator):
 class PostgreSQLGenerator(SQLGenerator):
     """Class for generating PostgreSQL compatible SQL."""
 
-    _SQL_TYPES = {
-        "string": "TEXT",
-        "floating": "REAL",
-        "integer": "INTEGER",
-        "datetime": "TIMESTAMP",
-        "datetime64": "TIMESTAMP",
-        "date": "DATE",
-        "time": "TIME",
-        "boolean": "INTEGER",
-    }
-
     @staticmethod
     def _id(identifier):
         return f'"{identifier}"'
@@ -214,17 +190,6 @@ class PostgreSQLGenerator(SQLGenerator):
 
 class SQLiteGenerator(SQLGenerator):
     """Class for generating SQLite compatible SQL."""
-
-    _SQL_TYPES = {
-        "string": "TEXT",
-        "floating": "REAL",
-        "integer": "INTEGER",
-        "datetime": "TIMESTAMP",
-        "datetime64": "TIMESTAMP",
-        "date": "DATE",
-        "time": "TIME",
-        "boolean": "INTEGER",
-    }
 
     @staticmethod
     def _id(identifier):
